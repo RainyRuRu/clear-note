@@ -3,59 +3,30 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Session;
 use Request;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
-
-    use AuthenticatesUsers;
-
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/home';
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('guest', ['except' => 'logout']);
-    }
-
     public function login()
     {
         $email = Request::get('email');
         $password = Request::get('password');
         $remember_me = true;
 
-        if (Auth::attempt(['email' => $email, 'password' => $password], $remember_me))
-        {
-            var_dump("OK");
+        if (Auth::attempt(['email' => $email, 'password' => $password], $remember_me)) {
+            return redirect()->intended('/');
         }
-    }
 
-
+        //Todo::沒登入要怎麼辦?
     }
 
     public function logout()
     {
-
+        Auth::logout();
+        return redirect('/');
     }
 }

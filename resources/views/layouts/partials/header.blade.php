@@ -3,9 +3,17 @@
         <a id="header_title" class="col-md-2" href="\">
             Clear Note
         </a>
+        @if (!Auth::check())
         <div id="header_login" class="col-md-1 col-md-offset-8 header-link" data-toggle="modal" data-target="#myModal">
             登入
         </div>
+        @else
+        <div id="header_out" class="col-md-1 col-md-offset-8 header-link">
+            <a href="/logout">
+            登出
+                </a>
+        </div>
+        @endif
         <a id="header_sign_up" class="col-md-1 header-link" href="#index_sign_up">
             註冊
         </a>
