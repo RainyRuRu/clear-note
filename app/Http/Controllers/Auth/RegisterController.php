@@ -63,14 +63,12 @@ class RegisterController extends Controller
             return;
         }
 
-        //Todo::可以改view名稱
-        return View('register')
+        return View('finish_registration')
             ->with('user', $user);
     }
 
     private function checkToken($user, $token)
     {
-        ////這個是用hasOne的方式寫的
         $verification = $user->verification;
 
         if (is_null($verification)) {
@@ -81,7 +79,7 @@ class RegisterController extends Controller
             return true;
         }
 
-        //false 不是token不對就是認證過了...
+        // token不對或是認證過了
         return false;
     }
 
@@ -110,6 +108,6 @@ class RegisterController extends Controller
 
         $user->verification->delete();
 
-        //Todo::註冊完要幹麻，傳哪個view
+        return View('index');
     }
 }
