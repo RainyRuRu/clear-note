@@ -12,7 +12,10 @@
 */
 
 Route::get('/', function () {
-    return view('index');
+    return view('test');
 });
 
 Route::post('/register', 'Auth\RegisterController@register');
+Route::get('/activeUser/{id}/{token}', 'Auth\RegisterController@activeUser');
+Route::post('/register/profile', 'Auth\RegisterController@registerProfile');
+Route::post('/login', 'Auth\LoginController@login');

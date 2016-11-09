@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Request;
+use Auth;
 
 class LoginController extends Controller
 {
@@ -36,4 +38,18 @@ class LoginController extends Controller
     {
         $this->middleware('guest', ['except' => 'logout']);
     }
+
+    public function login()
+    {
+        $email = Request::get('email');
+        $password = Request::get('password');
+        $remember_me = true;
+
+        if (Auth::attempt(['email' => $email, 'password' => $password], $remember_me))
+        {
+            var_dump("OK");
+        }
+    }
+
+
 }
